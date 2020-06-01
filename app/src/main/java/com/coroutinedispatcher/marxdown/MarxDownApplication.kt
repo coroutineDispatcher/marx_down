@@ -24,5 +24,8 @@ class MarxDownApplication : Application() {
 
         fun getEditorFragment() =
             checkNotNull(editorFragmentInstance) { "EditorFragment has not been instantiated yet" }
+
+        fun getDocumentsFragment() =
+            checkNotNull(documentsFragmentInstance) { "DocumentFragment has not been instantiated yet" }
     }
 }

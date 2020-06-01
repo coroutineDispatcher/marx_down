@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_holder, MarxDownApplication.getEditorFragment())
-                .commit()
+            .add(R.id.fragment_holder, MarxDownApplication.getEditorFragment())
+            .commit()
     }
 
     override fun onDestroy() {
