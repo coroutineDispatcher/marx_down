@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_holder, MarxDownApplication.getEditorFragment())
+            .add(R.id.fragment_holder, MarxDownApplication.getDocumentsFragment())
             .commit()
     }
 
