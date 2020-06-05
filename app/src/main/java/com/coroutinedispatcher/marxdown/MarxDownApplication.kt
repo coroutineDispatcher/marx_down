@@ -1,6 +1,8 @@
 package com.coroutinedispatcher.marxdown
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import com.coroutinedispatcher.marxdown.ui.documents.DocumentsFragment
 import com.coroutinedispatcher.marxdown.ui.editor.EditorFragment
 import io.realm.Realm
@@ -20,6 +22,7 @@ class MarxDownApplication : Application() {
         frozenRealm = realm.freeze()
         editorFragmentInstance = editorFragment
         documentsFragmentInstance = documentsFragment
+        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
     }
 
     companion object {
