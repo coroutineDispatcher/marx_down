@@ -10,24 +10,30 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class EditorViewModel : ViewModel() {
-    private val _state = MutableStateFlow<State>(State.Idle)
-    val state: StateFlow<State> = _state
+    private val _state = MutableStateFlow<State<String>>(State.Idle())
+    val state: StateFlow<State<String>> = _state
 
-    sealed class State {
-        object Idle : State()
+    sealed class State<T> {
+        data class Idle<T>(var data: T? = null) : State<T>()
 
         // Todo to be deleted
-        object Loading : State()
-        object Success : State()
+        data class Loading<T>(var data: T? = null) : State<T>()
+        data class Success<T>(var data: T? = null) : State<T>()
     }
 
     init {
         viewModelScope.launch {
-            _state.value = State.Idle
+            _state.value = State.Idle()
             delay(1000)
-            _state.value = State.Loading
+            _state.value = State.Loading()
             delay(1000)
-            _state.value = State.Success
+            _state.value = State.Success()
+        }
+    }
+
+    fun onTextChanged(text: String) {
+        viewModelScope.launch {
+            _state.value = State.Success(text)
         }
     }
 }

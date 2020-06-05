@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MarxDown</string>
+
+<!--    EditorFragment strings-->
+    <string name="et_input_hint">Start typing here&#8230;</string>
+    <string name="tv_display_hint">Your formatted text will be displayed here!</string>
 </resources>
