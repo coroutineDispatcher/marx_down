@@ -3,9 +3,12 @@ package com.coroutinedispatcher.marxdown.ui.editor
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +26,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initializeTypeFaces()
         observeState()
     }
 
@@ -34,6 +38,22 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     private fun initializeTextView(view: View) {
         tvDisplay = view.findViewById(R.id.tv_display)
+        displayTextViewHint()
+    }
+
+    private fun displayTextViewHint() {
+        tvDisplay.apply {
+            text = getString(R.string.tv_display_hint)
+            setTextColor(ContextCompat.getColor(context, R.color.grey_500))
+            gravity = Gravity.CENTER
+        }
+    }
+
+    private fun activateTextView() {
+        tvDisplay.apply {
+            setTextColor(ContextCompat.getColor(context, R.color.grey_900))
+            gravity = Gravity.NO_GRAVITY
+        }
     }
 
     private fun initializeEditText(view: View) {
@@ -49,12 +69,30 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
         })
     }
 
+    private fun initializeTypeFaces() {
+        context?.let { mContext ->
+            ResourcesCompat.getFont(mContext, R.font.vollkorn_bold)?.let { mTypeface ->
+                editorViewModel.boldTypeface = mTypeface
+            }
+            ResourcesCompat.getFont(mContext, R.font.vollkorn_italic)?.let { mTypeface ->
+                editorViewModel.italicTypeface = mTypeface
+            }
+        }
+    }
+
     private fun observeState() {
         editorViewModel.state
             .onEach { state ->
                 Timber.d("$state")
-                if (state is EditorViewModel.State.Success && !state.data.isNullOrBlank()) {
-                    tvDisplay.text = state.data
+                if (state is EditorViewModel.State.Success && state.data != null) {
+                    if (state.data.isNullOrBlank()) {
+                        displayTextViewHint()
+                    } else {
+                        tvDisplay.text = state.data
+                        if ((state.data ?: "").length == 1) {
+                            activateTextView()
+                        }
+                    }
                 }
             }
             .launchIn(lifecycleScope)

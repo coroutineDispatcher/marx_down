@@ -2,40 +2,59 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/space_16dp"
+    android:paddingStart="@dimen/space_16dp"
+    android:paddingTop="@dimen/space_16dp"
+    android:paddingEnd="@dimen/space_16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/grey_100">
 
-    <TextView
-        android:id="@+id/tv_display"
+    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_display_hint"
-        android:textSize="@dimen/text_14sp"
-        android:gravity="center"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/space_16dp"
+        app:elevation="@dimen/space_4dp"
+        app:contentPadding="@dimen/space_16dp"
+        app:cardCornerRadius="@dimen/space_8dp"
+        app:cardBackgroundColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/gl_horizontal_center" />
+        app:layout_constraintBottom_toTopOf="@+id/cv_input">
+        <TextView
+            android:id="@+id/tv_display"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:fontFamily="@font/vollkorn"
+            android:text="@string/tv_display_hint"
+            android:textSize="@dimen/text_14sp"
+            android:textColor="@color/grey_500"
+            android:gravity="center"/>
+    </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gl_horizontal_center"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <EditText
-        android:id="@+id/et_input"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:hint="@string/et_input_hint"
-        android:textSize="@dimen/text_14sp"
-        android:inputType="textMultiLine"
+        android:layout_marginBottom="@dimen/space_16dp"
+        app:elevation="@dimen/space_4dp"
+        app:contentPadding="@dimen/space_16dp"
+        app:cardCornerRadius="@dimen/space_24dp"
+        app:cardBackgroundColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gl_horizontal_center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent">
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:fontFamily="@font/vollkorn"
+            android:hint="@string/et_input_hint"
+            android:textColorHint="@color/grey_500"
+            android:textColor="@color/grey_900"
+            android:textSize="@dimen/text_16sp"
+            android:inputType="textMultiLine" />
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
