@@ -37,7 +37,6 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     private fun openHtmlFragment() {
         // Todo add bundle parameters
-        if (MarxDownApplication.getHtmlFragment().isAdded) return
         requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.fragment_holder, MarxDownApplication.getHtmlFragment())
             .addToBackStack("")
