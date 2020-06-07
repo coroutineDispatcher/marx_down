@@ -14,9 +14,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_holder, MarxDownApplication.getDocumentsFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_holder, MarxDownApplication.getDocumentsFragment())
+                .commit()
+        }
     }
 
     override fun onDestroy() {
