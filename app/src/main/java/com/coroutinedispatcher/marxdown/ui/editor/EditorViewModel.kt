@@ -1,5 +1,8 @@
 package com.coroutinedispatcher.marxdown.ui.editor
 
+import androidx.hilt.Assisted
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -7,9 +10,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class EditorViewModel : ViewModel() {
+class EditorViewModel @ViewModelInject constructor(
+    private val playgroundRepository: PlaygroundRepository,
+    @Assisted private val savedStateHandle: SavedStateHandle
+) : ViewModel() {
     private val _state = MutableStateFlow<State>(State.Idle)
     val state: StateFlow<State> = _state
 
@@ -31,3 +38,6 @@ class EditorViewModel : ViewModel() {
         }
     }
 }
+
+// Todo to be deleted <3
+class PlaygroundRepository @Inject constructor()

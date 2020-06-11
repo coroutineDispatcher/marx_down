@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.coroutinedispatcher.marxdown.R
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DocumentsFragment : Fragment(R.layout.fragment_documents) {
 
     private val documentsViewModel by viewModels<DocumentsViewModel>()
